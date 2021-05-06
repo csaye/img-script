@@ -1,19 +1,27 @@
+import sys
 from PIL import Image
-
-# open program and get data
-program = Image.open('./program.png')
-width, height = program.size
-pixels = program.load()
 
 # variable class
 class Var:
 
-    def __init__(self, value, building):
+    def __init__(self, value, reading):
         self.value = value
-        self.building = building
+        self.reading = reading
         
     value = ''
-    building = False
+    reading = False
+
+# open program
+try:
+    program = Image.open('./program.png')
+# fail open
+except:
+    print('No program.png file found.')
+    sys.exit()
+
+# get program data
+width, height = program.size
+pixels = program.load()
 
 # initialize varlist
 varlist = []
@@ -35,26 +43,29 @@ for y in range(height):
         if r == 0:
 
             # for each var in varlist
+            building = False
             for i in range(256):
 
-                # if building var
-                if varlist[i].building:
+                # if reading var
+                if varlist[i].reading:
 
                     # append value
                     if g == 0: varlist[i].value += chr(b) # ascii
                     elif g == 1: varlist[i].value += str(b) # integer
+                    elif g == 2: varlist[i].value += varlist[b].value # variable
+                    building = True
 
-        # print character
+            # if not building
+            if not building:
+
+                # print character
+                if g == 0: print(chr(b), end='') # ascii
+                elif g == 1: print(b) # integer
+                elif g == 2: print(varlist[b].value) # variable
+
+        # variable definition
         elif r == 1:
-            
-            if g == 0: print(chr(b), end='') # ascii
-            elif g == 1: print(b) # integer
-
-        # toggle variable definition
-        elif r == 2:
 
             if g == 0: varlist[b] = Var('', True) # start read
-            if g == 1: varlist[b] = Var('', False) # end read
+            if g == 1: varlist[b].reading = False # end read
 
-        # print variable
-        elif r == 3: print(varlist[b].value)
