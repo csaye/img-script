@@ -20,3 +20,10 @@ The r value determines the function, the g value determines the function type, a
   - g0 (start read)
   - g1 (end read)
     - b (variable index)
+
+## Examples
+
+Hello World
+![helloworld.png](examples/helloworld.png)
+
+More examples in [examples folder](examples).
