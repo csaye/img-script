@@ -5,9 +5,21 @@ program = Image.open('./program.png')
 width, height = program.size
 pixels = program.load()
 
+# variable class
+class Var:
+
+    def __init__(self, value, building):
+        self.value = value
+        self.building = building
+        
+    value = ''
+    building = False
+
 # initialize varlist
 varlist = []
-for i in range(256): varlist.append(0)
+for i in range(256):
+    var = Var('', False)
+    varlist.append(var)
 
 # for each pixel
 for y in range(height):
@@ -26,11 +38,11 @@ for y in range(height):
             if g == 0: print(chr(b), end='') # ascii
             elif g == 1: print(b) # integer
 
-        # variable definition
-        elif r == 1: varlist[b] = g
-
-        # print variable
+        # toggle variable definition
         elif r == 2:
 
-            if g == 0: print(chr(varlist[b]), end='') # ascii
-            elif g == 1: print(varlist[b]) # integer
+            if g == 0: varlist[b] = Var('', True) # start read
+            if g == 1: varlist[b] = Var('', False) # end read
+
+        # print variable
+        elif r == 3: print(varlist[b].value)
