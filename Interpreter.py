@@ -29,12 +29,24 @@ for y in range(height):
         pixel = pixels[x, y]
         r, g, b, a = pixel
 
-        # skip if alpha 0
-        if a == 0: continue
+        if a == 0: continue # skip if pixel transparent
 
-        # print character
+        # value character
         if r == 0:
 
+            # for each var in varlist
+            for i in range(256):
+
+                # if building var
+                if varlist[i].building:
+
+                    # append value
+                    if g == 0: varlist[i].value += chr(b) # ascii
+                    elif g == 1: varlist[i].value += str(b) # integer
+
+        # print character
+        elif r == 1:
+            
             if g == 0: print(chr(b), end='') # ascii
             elif g == 1: print(b) # integer
 
