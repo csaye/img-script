@@ -19,53 +19,66 @@ except:
     print('No program.png file found.')
     sys.exit()
 
-# get program data
-width, height = program.size
-pixels = program.load()
-
 # initialize varlist
 varlist = []
 for i in range(256):
     var = Var('', False)
     varlist.append(var)
 
-# for each pixel
+# get program data
+width, height = program.size
+pix = program.load()
+
+# create pixels array
+pixels = []
 for y in range(height):
     for x in range(width):
+        pixel = pix[x, y]
+        pixels.append(pixel)
 
-        # get pixel and pixel data
-        pixel = pixels[x, y]
-        r, g, b, a = pixel
+# processes pixel of given index
+def process(index):
 
-        if a == 0: continue # skip if pixel transparent
+    # get pixel and pixel data
+    pixel = pixels[index]
+    r, g, b, a = pixel
 
-        # value character
-        if r == 0:
+    if a == 0: return # skip if pixel transparent
 
-            # for each var in varlist
-            building = False
-            for i in range(256):
+    # value character
+    if r == 0:
 
-                # if reading var
-                if varlist[i].reading:
+        # for each var in varlist
+        building = False
+        for i in range(256):
 
-                    # append value
-                    if g == 0: varlist[i].value += chr(b) # ascii
-                    elif g == 1: varlist[i].value += str(b) # integer
-                    elif g == 2: varlist[i].value += varlist[b].value # variable
-                    building = True
+            # if reading var
+            if varlist[i].reading:
 
-            # if not building
-            if not building:
+                # append value
+                if g == 0: varlist[i].value += chr(b) # ascii
+                elif g == 1: varlist[i].value += str(b) # integer
+                elif g == 2: varlist[i].value += varlist[b].value # variable
+                building = True
 
-                # print character
-                if g == 0: print(chr(b), end='') # ascii
-                elif g == 1: print(b) # integer
-                elif g == 2: print(varlist[b].value) # variable
+        # if not building
+        if not building:
 
-        # variable definition
-        elif r == 1:
+            # print character
+            if g == 0: print(chr(b), end='') # ascii
+            elif g == 1: print(b) # integer
+            elif g == 2: print(varlist[b].value) # variable
 
-            if g == 0: varlist[b] = Var('', True) # start read
-            if g == 1: varlist[b].reading = False # end read
+    # variable definition
+    elif r == 1:
 
+        if g == 0: varlist[b] = Var('', True) # start read
+        if g == 1: varlist[b].reading = False # end read
+
+# loop through pixels
+index = 0
+while index < len(pixels):
+
+    # process index and increment
+    process(index)
+    index += 1
