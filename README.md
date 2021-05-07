@@ -21,6 +21,16 @@ The r value determines the function, the g value determines the function type, a
   - g0 (start read)
   - g1 (end read)
     - b (variable index)
+- r2 (if statement)
+  - g0 (equals)
+  - g1 (not equals)
+  - g2 (greater than)
+  - g3 (less than)
+    - b (pixels to skip if false)
+  - pixel + 1 - term 1
+  - pixel + 2 - operation
+  - pixel + 3 - term 2
+  - pixel + 4 - result
 
 ## Examples
 

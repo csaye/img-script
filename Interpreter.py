@@ -1,5 +1,16 @@
-import sys
+import sys, operator
 from PIL import Image
+
+# operators
+operators = [
+    operator.add,
+    operator.sub,
+    operator.mul,
+    operator.truediv,
+    operator.pow,
+    operator.mod,
+    operator.floordiv
+]
 
 # variable class
 class Var:
@@ -36,17 +47,36 @@ for y in range(height):
         pixel = pix[x, y]
         pixels.append(pixel)
 
+# returns value of given value pixel
+def value(pixel):
+
+    # get pixel data
+    r, g, b, a = pixel
+
+    # return if empty or not value pixel
+    if a == 0 or r != 0: return ''
+
+    # return value
+    if g == 0: return chr(b) # ascii
+    elif g == 1: return b # integer
+    elif g == 2: return varlist[b].value # variable
+    elif g == 3: return operators[b] # operator
+
 # processes pixel of given index
-def process(index):
+def process(i):
+    global index
 
     # get pixel and pixel data
-    pixel = pixels[index]
+    pixel = pixels[i]
     r, g, b, a = pixel
 
     if a == 0: return # skip if pixel transparent
 
     # value character
     if r == 0:
+
+        # get value as string
+        val = str(value(pixel))
 
         # for each var in varlist
         building = False
@@ -56,24 +86,37 @@ def process(index):
             if varlist[i].reading:
 
                 # append value
-                if g == 0: varlist[i].value += chr(b) # ascii
-                elif g == 1: varlist[i].value += str(b) # integer
-                elif g == 2: varlist[i].value += varlist[b].value # variable
+                varlist[i].value += val
                 building = True
 
         # if not building
         if not building:
 
             # print character
-            if g == 0: print(chr(b), end='') # ascii
-            elif g == 1: print(b) # integer
-            elif g == 2: print(varlist[b].value) # variable
+            if g == 0: print(val, end='') # ascii
+            else: print(val) # all other values
 
     # variable definition
     elif r == 1:
 
         if g == 0: varlist[b] = Var('', True) # start read
         if g == 1: varlist[b].reading = False # end read
+
+    # if statement
+    elif r == 2:
+
+        term1 = value(pixels[index + 1]) # term 1
+        operation = value(pixels[index + 2]) # operation
+        term2 = value(pixels[index + 3]) # term 2
+        result = value(pixels[index + 4]) # result
+
+        index += 4 # skip if statement pixels
+
+        # if statement does not pass, skip pixels
+        if g == 0 and operation(term1, term2) != result: index += b # equals
+        elif g == 1 and operation(term1, term2) == result: index += b # not equals
+        elif g == 2 and operation(term1, term2) <= result: index += b # greater than
+        elif g == 3 and operation(term1, term2) >= result: index += b # less than
 
 # loop through pixels
 index = 0
