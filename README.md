@@ -34,10 +34,22 @@ The r value determines the function, the g value determines the function type, a
 
 ## Examples
 
-Hello World
+### Hello World
+
+Prints "Hello World".
 
 ![](https://user-images.githubusercontent.com/27871609/117510020-87748a80-af48-11eb-9c59-73dff99db74b.png)
 
 (0, 0, 72), (0, 0, 101), (0, 0, 108), (0, 0, 108), (0, 0, 111), (0, 0, 32), (0, 0, 87), (0, 0, 111), (0, 0, 114), (0, 0, 108), (0, 0, 100), (0, 0, 10)
 
-More examples in [examples folder](examples).
+### If Statement
+
+Evaluates 1 + 1 = 2 and prints "2" if true.
+
+![](https://user-images.githubusercontent.com/27871609/117511910-cfe17780-af4b-11eb-90f2-594c660c38ce.png)
+
+(2, 0, 1), (0, 1, 1), (0, 3, 0), (0, 1, 1), (0, 1, 2), (0, 1, 2)
+
+### More Examples
+
+More examples can be found in the [examples folder](examples).
