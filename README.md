@@ -1,4 +1,7 @@
 # ImgScript
+
+<img width="256px" src="https://user-images.githubusercontent.com/27871609/117729755-8772c580-b1a8-11eb-9d80-c0933c7b8876.png">
+
 An image-based programming language.
 
 ## Interpreter
