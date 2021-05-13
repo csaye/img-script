@@ -19,12 +19,23 @@ class Var:
         self.value = value
         self.reading = reading
 
+# get args
+args = sys.argv
+
+# fail path
+if len(args) < 2:
+    print('error: no file path given')
+    sys.exit()
+
+# get program path
+path = args[1]
+
 # open program
 try:
-    program = Image.open('./program.png')
+    program = Image.open(path)
 # fail open
 except:
-    print('No program.png file found.')
+    print(f'error: {path} is not a valid image')
     sys.exit()
 
 # initialize varlist
@@ -155,7 +166,7 @@ for pixel in pixels:
         rgbs.append(f'({r}, {g}, {b})') # append pixel to rgbs list
 
 # print pixel list
-print('Processing program.png:')
+print(f'Processing {path}:')
 print(', '.join(rgbs))
 print('----------------')
 
