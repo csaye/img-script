@@ -147,6 +147,18 @@ def process(i):
         elif g == 2: index -= b # skip backward pixels
         elif g == 3: index = len(pixels) # go to end
 
+# print pixel data
+rgbs = []
+for pixel in pixels:
+        r, g, b, a = pixel # get pixel data
+        if a == 0: continue # skip pixel if empty
+        rgbs.append(f'({r}, {g}, {b})') # append pixel to rgbs list
+
+# print pixel list
+print('Processing program.png:')
+print(', '.join(rgbs))
+print('----------------')
+
 # loop through pixels
 index = 0
 while index < len(pixels):
