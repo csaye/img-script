@@ -4,6 +4,27 @@
 
 An image-based programming language.
 
+## Installation/Compilation
+
+In order to install ImgScript, clone the project:
+
+```bash
+git clone https://github.com/csaye/imgscript
+cd imgscript/
+```
+
+Then compile your image file like so:
+
+```
+./compile.sh <image>
+```
+
+If necessary, give permission to execute `compile.sh`:
+
+```bash
+chmod +x compile.sh
+```
+
 ## Interpreter
 
 The interpreter takes an image as input and processes the pixels from top left to bottom right.
