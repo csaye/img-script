@@ -12,47 +12,50 @@ A pixel with an alpha of zero will be skipped.
 
 The r value determines the function, the g value determines the function type, and the b value determines the function value.
 
-## Functions
+## r0 (value)
 
-- r0 (value)
-  - g0 (ascii)
-  - g1 (integer)
-  - g2 (variable)
-  - g3 (operator)
-    - b (value)
-- r1 (variable)
-  - g0 (start read)
-  - g1 (end read)
-    - b (variable index)
-- r2 (if statement)
-  - two term statements
-    - g0 (equals)
-    - g1 (not equals)
-    - g2 (greater than)
-    - g3 (less than)
-    - pixel + 1: term 1
-    - pixel + 2: term 2
-      - b (pixels to skip if false)
-  - three term statements
-    - g4 (equals)
-    - g5 (not equals)
-    - g6 (greater than)
-    - g7 (less than)
-    - pixel + 1: term 1
-    - pixel + 2: operation
-    - pixel + 3: term 2
-    - pixel + 4: term 3
-      - b (pixels to skip if false)
-- r3 (goto)
-  - g0 (go to pixel)
-  - g1 (skip forward pixels)
-  - g1 (skip backward pixels)
-  - g2 (go to end)
-    - b (pixel count)
+- g0 (ascii)
+- g1 (integer)
+- g2 (variable)
+- g3 (operator)
+  - b (value)
+
+## r1 (variable)
+
+- g0 (start read)
+- g1 (end read)
+  - b (variable index)
+
+## r2 (if)
+- two term statements
+  - g0 (equals)
+  - g1 (not equals)
+  - g2 (greater than)
+  - g3 (less than)
+  - pixel + 1: term 1
+  - pixel + 2: term 2
+    - b (pixels to skip if false)
+- three term statements
+  - g4 (equals)
+  - g5 (not equals)
+  - g6 (greater than)
+  - g7 (less than)
+  - pixel + 1: term 1
+  - pixel + 2: operation
+  - pixel + 3: term 2
+  - pixel + 4: term 3
+    - b (pixels to skip if false)
+
+## r3 (goto)
+- g0 (go to pixel)
+- g1 (skip forward pixels)
+- g1 (skip backward pixels)
+- g2 (go to end)
+  - b (pixel count)
 
 ## Examples
 
-### Hello World
+### [HelloWorld.png](examples/helloworld.png)
 
 Prints "Hello World".
 
@@ -60,7 +63,7 @@ Prints "Hello World".
 
 (0, 0, 72), (0, 0, 101), (0, 0, 108), (0, 0, 108), (0, 0, 111), (0, 0, 32), (0, 0, 87), (0, 0, 111), (0, 0, 114), (0, 0, 108), (0, 0, 100), (0, 0, 10)
 
-### If Statement
+### [IfStatement.png](examples/ifstatement.png)
 
 Evaluates 1 + 1 = 2 and prints "2" if true.
 
@@ -68,7 +71,7 @@ Evaluates 1 + 1 = 2 and prints "2" if true.
 
 (2, 0, 1), (0, 1, 1), (0, 3, 0), (0, 1, 1), (0, 1, 2), (0, 1, 2)
 
-### For statement
+### [ForLoop.png](examples/forloop.png)
 
 Prints and increments 0 until it is equal to 10.
 
