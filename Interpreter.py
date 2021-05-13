@@ -110,13 +110,13 @@ def process(i):
         term2 = value(pixels[index + 3]) # term 2
         result = value(pixels[index + 4]) # result
 
-        index += 4 # skip if statement pixels
+    # goto statement
+    elif r == 3:
 
-        # if statement does not pass, skip pixels
-        if g == 0 and operation(term1, term2) != result: index += b # equals
-        elif g == 1 and operation(term1, term2) == result: index += b # not equals
-        elif g == 2 and operation(term1, term2) <= result: index += b # greater than
-        elif g == 3 and operation(term1, term2) >= result: index += b # less than
+        if g == 0: index = b - 1 # go to pixel count
+        elif g == 1: index += b # skip forward pixels
+        elif g == 2: index -= b # skip backward pixels
+        elif g == 3: index = len(pixels) # go to end
 
 # loop through pixels
 index = 0

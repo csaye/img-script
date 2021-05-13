@@ -34,6 +34,12 @@ The r value determines the function, the g value determines the function type, a
   - pixel + 2 - operation
   - pixel + 3 - term 2
   - pixel + 4 - result
+- r3 (goto)
+  - g0 (go to pixel)
+  - g1 (skip forward pixels)
+  - g1 (skip backward pixels)
+  - g2 (go to end)
+    - b (pixel count)
 
 ## Examples
 
