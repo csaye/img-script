@@ -25,15 +25,24 @@ The r value determines the function, the g value determines the function type, a
   - g1 (end read)
     - b (variable index)
 - r2 (if statement)
-  - g0 (equals)
-  - g1 (not equals)
-  - g2 (greater than)
-  - g3 (less than)
-    - b (pixels to skip if false)
-  - pixel + 1 - term 1
-  - pixel + 2 - operation
-  - pixel + 3 - term 2
-  - pixel + 4 - result
+  - two term statements
+    - g0 (equals)
+    - g1 (not equals)
+    - g2 (greater than)
+    - g3 (less than)
+    - pixel + 1: term 1
+    - pixel + 2: term 2
+      - b (pixels to skip if false)
+  - three term statements
+    - g4 (equals)
+    - g5 (not equals)
+    - g6 (greater than)
+    - g7 (less than)
+    - pixel + 1: term 1
+    - pixel + 2: operation
+    - pixel + 3: term 2
+    - pixel + 4: term 3
+      - b (pixels to skip if false)
 - r3 (goto)
   - g0 (go to pixel)
   - g1 (skip forward pixels)
@@ -58,6 +67,14 @@ Evaluates 1 + 1 = 2 and prints "2" if true.
 ![](https://user-images.githubusercontent.com/27871609/117511910-cfe17780-af4b-11eb-90f2-594c660c38ce.png)
 
 (2, 0, 1), (0, 1, 1), (0, 3, 0), (0, 1, 1), (0, 1, 2), (0, 1, 2)
+
+### For statement
+
+Prints and increments 0 until it is equal to 10.
+
+![](https://user-images.githubusercontent.com/27871609/118070868-f3e5f400-b363-11eb-9d3f-aafabe3d70e9.png)
+
+(1, 0, 0), (0, 1, 0), (1, 1, 0), (2, 0, 1), (0, 2, 0), (0, 1, 10), (3, 3, 0), (0, 2, 0), (1, 2, 0), (3, 0, 3)
 
 ### More Examples
 
